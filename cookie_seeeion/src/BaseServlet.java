@@ -1,7 +1,4 @@
-package com.xcw.web;
-
 import com.alibaba.fastjson.JSON;
-import com.xcw.pojo.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
