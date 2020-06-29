@@ -33,10 +33,10 @@ public abstract class BaseServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
-
+//        System.out.println(request.getContentType());
 
         //读取json流
-        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream()));
+        BufferedReader br = new BufferedReader(new InputStreamReader(request.getInputStream(), "utf-8"));
         String str;
         StringBuilder sb = new StringBuilder();
         while((str = br.readLine()) != null){
@@ -46,6 +46,7 @@ public abstract class BaseServlet extends HttpServlet {
 //        System.out.println(user);
 //        String action = user.getAction();
         String action = (String) JSON.parseObject(sb.toString()).get("action");
+        System.out.println("调用的方法：" + action);
 //        System.out.println(action);
         try {
             Method method = this.getClass().getDeclaredMethod(action, HttpServletRequest.class, HttpServletResponse.class, String.class);//            System.out.println(method);
