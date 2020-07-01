@@ -5,7 +5,7 @@ import com.xcw.pojo.User;
 public interface UserService {
     boolean isExistUsername(String username);
 
-    boolean login(User user);
+    int login(User user);
 
     boolean register(User user);
 }

@@ -95,4 +95,5 @@ public class Book {
                 ", img_path='" + img_path + '\'' +
                 '}';
     }
+
 }

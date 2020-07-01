@@ -22,14 +22,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(User user) {
+    public int login(User user) {
         User queryResult = dao.queryByNameAndPassword(user.getUsername(), user.getPassword());
         if(queryResult != null){
             System.out.println("login success");
-            return true;
+            return queryResult.getId();
         }
         System.out.println("login failed");
-        return false;
+        return -1;
     }
 
     @Override

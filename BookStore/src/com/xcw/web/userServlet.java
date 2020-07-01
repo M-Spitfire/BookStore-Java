@@ -93,9 +93,10 @@ public class userServlet extends BaseServlet {
         HttpSession session = request.getSession();
         session.setAttribute("username", username);
 
+        int id = userService.login(user);
 
-        boolean isLogin = userService.login(user);
-        if(isLogin){
+        if(id != -1){
+            session.setAttribute("userId", id);
             session.setAttribute("loginStatus", true);
             response.getWriter().write("{\"info\":\"login success\",\"state\":4}");
 //            response.sendRedirect("http://localhost:8080/BookStore/pages/user/login_success.html");

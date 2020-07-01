@@ -58,16 +58,6 @@ public class Cart {
 
 
 
-    private BigDecimal calculateTotalPrice(){
-        BigDecimal total = new BigDecimal(0);
-        Set<Map.Entry<String, CartItem>> set = books.entrySet();
-        for(Map.Entry entry : set){
-            CartItem item = (CartItem)entry.getValue();
-            total.add(item.getPrice().multiply(new BigDecimal(item.getCount())));
-        }
-        return total;
-    }
-
     @Override
     public String toString() {
         return "Cart{" +
@@ -104,7 +94,12 @@ public class Cart {
     public Cart(Map<String, CartItem> books) {
         this.NumOfBooks = books.size();
         this.books = books;
-        this.totalPrice = calculateTotalPrice();
+        this.totalPrice = new BigDecimal(0);
+        Set<Map.Entry<String, CartItem>> set = books.entrySet();
+        for(Map.Entry entry : set){
+            CartItem item = (CartItem)entry.getValue();
+            this.totalPrice = this.totalPrice.add(item.getPrice().multiply(new BigDecimal(item.getCount())));
+        }
     }
 
     public Cart() {
