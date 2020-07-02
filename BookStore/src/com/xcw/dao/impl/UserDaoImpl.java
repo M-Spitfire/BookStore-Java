@@ -15,7 +15,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
 //        System.out.println(connection);
 //        System.out.println("*************************");
         User user = queryForOne(User.class, connection, sql, name);
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return user;
     }
 
@@ -24,7 +24,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql = "select id, username, password, email from users where username = ? and password = ?";
         Connection connection = jdbcUtils.getConnection();
         User user = queryForOne(User.class, connection, sql, name, password);
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return user;
     }
 
@@ -33,7 +33,7 @@ public class UserDaoImpl extends BaseDao implements UserDao {
         String sql = "insert into users(username,password,email) values(?,?,?);";
         Connection connection = jdbcUtils.getConnection();
         int n = update(connection, sql, user.getUsername(), user.getPassword(), user.getEmail());
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return n;
     }
 }

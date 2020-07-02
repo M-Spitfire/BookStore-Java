@@ -73,7 +73,7 @@ public class bookServlet extends BaseServlet{
 
     protected void queryForPage(HttpServletRequest request, HttpServletResponse response, String json) throws ServletException, IOException {
         Page page = JSON.parseObject(json, Page.class);
-//        System.out.println(page);
+        System.out.println("queryForPage" + page);
         List<Book> list = service.queryForPage(page);
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(JSON.toJSONString(list));
@@ -82,6 +82,7 @@ public class bookServlet extends BaseServlet{
     protected void getNumOfBooks(HttpServletRequest request, HttpServletResponse response, String json) throws ServletException, IOException {
 //        System.out.println("counting...");
         Page page = JSON.parseObject(json, Page.class);
+        System.out.println("getNumOfBooks" + page);
         int n = service.getNumOfBooks(page.getMin(), page.getMax());
         response.setCharacterEncoding("utf-8");
         response.getWriter().write(("{\"num\":" + n + '}'));

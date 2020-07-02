@@ -12,6 +12,7 @@ import java.util.Properties;
 public class jdbcUtils {
 
     private static DataSource ds;
+    private static ThreadLocal<Connection> conn = new ThreadLocal<>();
 
     static{
 //        System.out.println("****************\n****************");
@@ -31,13 +32,51 @@ public class jdbcUtils {
     }
 
     public static Connection getConnection(){
-        try {
-            return ds.getConnection();
-        } catch (Exception e) {
-            e.printStackTrace();
+        Connection connection = conn.get();
+        if(connection == null){
+            try {
+                connection = ds.getConnection();
+                conn.set(connection);
+                connection.setAutoCommit(false);//关闭数据库自动提交，开始一个事务
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
         }
-        return null;
+        return connection;
     }
+
+    public static void commitAndRelease() {
+        Connection connection = conn.get();
+        if(connection != null){
+            try {
+                connection.commit();
+                connection.close();
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+        conn.remove();
+    }
+
+    public static void rollbackAndRelease() {
+        Connection connection = conn.get();
+        if(connection != null){
+            try {
+                connection.rollback();
+                connection.close();
+            }
+            catch (SQLException e){
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+        conn.remove();
+    }
+
 
     public static void releaseConnection(Connection connection){
         try {

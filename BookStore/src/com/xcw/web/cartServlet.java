@@ -39,7 +39,7 @@ public class cartServlet extends BaseServlet {
         HttpSession session = request.getSession();
         Cart cart = (Cart) session.getAttribute("cart");
         Integer id = JSON.parseObject(json).getInteger("id");
-        System.out.println(id);
+//        System.out.println(id);
         cart.deleteItem(id);
     }
 

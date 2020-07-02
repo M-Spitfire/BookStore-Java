@@ -13,7 +13,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         String sql = "insert into orders values(?,?,?,?,?);";
         Connection connection = jdbcUtils.getConnection();
         update(connection, sql,order.getOrderId(), order.getUserId(), order.getCreateTime(), order.getPrice(), order.getStatus());
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
     }
 
     @Override
@@ -28,7 +28,7 @@ public class OrderDaoImpl extends BaseDao implements OrderDao {
         String sql = "update orders set status = ? where orderId = ?;";
         Connection connection = jdbcUtils.getConnection();
         update(connection,sql, status, orderId);
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface BookService {
     int updateBook(Book book);
     Book queryById(Integer id);
     List<Book> queryAll();
-    int getNumOfBooks(int min, int max);
+    int getNumOfBooks(Integer min, Integer max);
     List<Book> queryForPage(Page page);
     List<Book> queryByPrice(Page page);
 }

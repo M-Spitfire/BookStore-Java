@@ -17,7 +17,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         Connection connection = jdbcUtils.getConnection();
         int n = update(connection, sql, book.getName(), book.getAuthor(), book.getPrice(),
                 book.getSales(), book.getStock(), book.getImg_path());
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return n;
     }
 
@@ -26,7 +26,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         String sql = "delete from books where id = ?;";
         Connection connection = jdbcUtils.getConnection();
         int n = update(connection, sql, book.getId());
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return n;
     }
 
@@ -37,7 +37,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         Connection connection = jdbcUtils.getConnection();
         int n = update(connection, sql, book.getName(), book.getAuthor(), book.getPrice(),
                 book.getSales(), book.getStock(), book.getImg_path(), book.getId());
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return n;
     }
 
@@ -46,7 +46,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         String sql = "select * from books where id = ?";
         Connection connection = jdbcUtils.getConnection();
         Book book = queryForOne(Book.class, connection, sql, id);
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return book;
     }
 
@@ -55,7 +55,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         String sql = "select * from books where price between ? and ? limit ?, ?;";
         Connection connection = jdbcUtils.getConnection();
         List<Book> list = queryForList(Book.class, connection, sql, page.getMin(), page.getMax(), page.getCurrentPage() * page.getPageSize(), page.getPageSize());
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return list;
     }
 
@@ -72,7 +72,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
             sql = "select * from books where price between ? and ? limit ?, ?;";
             list = queryForList(Book.class, connection, sql, page.getMin(), page.getMax(), page.getCurrentPage() * page.getPageSize(), page.getPageSize());
         }
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return list;
     }
 
@@ -84,7 +84,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
         String sql = "select * from books";
         Connection connection = jdbcUtils.getConnection();
         List<Book> list = queryForList(Book.class, connection, sql);
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
         return list;
     }
 
@@ -93,12 +93,13 @@ public class BookDaoImpl extends BaseDao implements BookDao {
      * 返回有多少本书
      */
 
-    public int getNumOfBooks(int min, int max) {
+    public int getNumOfBooks(Integer min, Integer max) {
 //        System.out.println("min:" + min);
 //        System.out.println("max:" + max);
         String sql = null;
         long numOfBooks = 0;
         Connection connection = jdbcUtils.getConnection();
+//        System.out.println("数据库连接：" + connection);
         if(min == 0 && max == 0){
 //            System.out.println("查找全部");
             sql = "select count(*) from books";
@@ -110,6 +111,7 @@ public class BookDaoImpl extends BaseDao implements BookDao {
             numOfBooks = (long)queryForValue(connection, sql, min, max);
         }
 //        System.out.println(numOfBooks);
+//        jdbcUtils.releaseConnection(connection);
         return (int)numOfBooks;
     }
 }

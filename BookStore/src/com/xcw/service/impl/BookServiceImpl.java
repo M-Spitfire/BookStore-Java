@@ -39,7 +39,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public int getNumOfBooks(int min, int max) {
+    public int getNumOfBooks(Integer min, Integer max) {
         return service.getNumOfBooks(min, max);
     }
 

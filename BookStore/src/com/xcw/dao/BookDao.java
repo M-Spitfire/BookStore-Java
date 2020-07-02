@@ -25,5 +25,5 @@ public interface BookDao {
 
     List<Book> queryForPage(Page page);
 
-    int getNumOfBooks(int min, int max);
+    int getNumOfBooks(Integer min, Integer max);
 }

@@ -22,8 +22,8 @@ public abstract class BaseDao {
             return runner.update(connection, sql, args);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw new RuntimeException(throwables);
         }
-        return -1;
 
     }
 
@@ -53,8 +53,8 @@ public abstract class BaseDao {
 //            }
         } catch (Exception throwables) {
             throwables.printStackTrace();
+            throw new RuntimeException(throwables);
         }
-        return null;
     }
 
     public <T> List<T> queryForList(Class<T> type, Connection connection, String sql, Object...args){
@@ -63,8 +63,8 @@ public abstract class BaseDao {
             return runner.query(connection, sql, handler, args);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw new RuntimeException(throwables);
         }
-        return null;
     }
 
     public Object queryForValue( Connection connection, String sql, Object...args){
@@ -73,7 +73,7 @@ public abstract class BaseDao {
             return runner.query(connection, sql, handler, args);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
+            throw new RuntimeException(throwables);
         }
-        return null;
     }
 }

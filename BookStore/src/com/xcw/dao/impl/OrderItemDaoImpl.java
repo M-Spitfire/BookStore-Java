@@ -14,7 +14,7 @@ public class OrderItemDaoImpl extends BaseDao implements OrderItemDao {
         String sql = "insert into orderitems(name,count,price,totalPrice,orderId) values(?,?,?,?,?);";
         Connection connection = jdbcUtils.getConnection();
         update(connection, sql,item.getName(),item.getCount(),item.getPrice(),item.getTotalPrice(),item.getOrderId());
-        jdbcUtils.releaseConnection(connection);
+//        jdbcUtils.releaseConnection(connection);
     }
 
     @Override

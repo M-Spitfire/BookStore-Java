@@ -2,7 +2,6 @@ package com.xcw.web;
 
 import com.alibaba.fastjson.JSON;
 import com.google.code.kaptcha.Constants;
-import com.mysql.cj.protocol.x.ReusableInputStream;
 import com.xcw.pojo.User;
 import com.xcw.service.impl.UserServiceImpl;
 import com.xcw.utils.beanUtils;
